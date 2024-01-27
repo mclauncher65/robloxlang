@@ -1,0 +1,3 @@
+local NIL = {}
+
+return NIL
