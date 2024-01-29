@@ -28,7 +28,8 @@ Token.Type = {
 	CASE = 0x00000056,
 	DEFAULT = 0x00000057,
 	PAIRS = 0x00000058,
-	ARROW = 0x00000059
+	ARROW = 0x00000059,
+	BREAK = 0x00000060
 }
 
 Token.Values = {
@@ -58,6 +59,7 @@ Token.Values = {
 	["case"] = Token.Type.CASE,
 	["default"] = Token.Type.DEFAULT,
 	["pairs"] = Token.Type.PAIRS,
+	["break"] = Token.Type.BREAK,
 	["=>"] = Token.Type.ARROW
 }
 
