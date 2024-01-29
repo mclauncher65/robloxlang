@@ -57,6 +57,7 @@ export type StatementVisitor<R> = {
 	visitConstStmt: (ConstVarReturnType) -> R;
 	visitSwitchStmt: (SwitchReturnType) -> R;
 	visitPairsStmt: (PairsReturnType) -> R;
+	visitBreakStmt: (Statement) -> R;
 }
 
 return {
