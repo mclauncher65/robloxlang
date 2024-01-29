@@ -276,6 +276,12 @@ function Lexer.new(source: string)
 			[";"] = function(c)
 				self.NewWithValue(TokenTypes.Type.SEMICOLON, self.line, self.col)
 			end;
+			["!"] = function(c) 
+				if self.peekNext() == "=" then
+					self.advance()
+					self.NewWithValue(TokenTypes.Type.NOTEQ, self.line, self.col)
+				end
+			end;
 			["$"] = function(c)
 				self.NewWithValue(TokenTypes.Type.LAMBDA, self.line, self.col)
 			end;
