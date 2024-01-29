@@ -37,3 +37,26 @@ item {
   }
 }
 ```
+```js
+item {
+  function main() {
+    var lambda = $() {
+      return 10;
+    };
+
+    switch (123) {
+      case 123 {
+        print("Hi!");
+      }
+      default {
+        print("Hi!");
+      }
+    }
+
+    var matchexpr = switch 123 {
+      case 123 => "Hi";
+      default => "Hi";
+    }
+  }
+}
+```
