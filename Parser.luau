@@ -248,7 +248,7 @@ function Parser.new(tokens: {any})
 	function self.factor() 
 		local expr = self.pow()
 
-		while (self.match({TokenType.Type.DIVIDE, TokenType.Type.MULTIPLY, TokenType.Type.DIVIEQ, TokenType.Type.MULTIPEQ, TokenType.Type.FLOOR, TokenType.Type.FLOEQ})) do
+		while (self.match({TokenType.Type.DIVIDE, TokenType.Type.MULTIPLY, TokenType.Type.DIVIEQ, TokenType.Type.MULTIPEQ, TokenType.Type.FLOOR, TokenType.Type.FLOEQ, TokenType.Type.REMAINDEQ, TokenType.Type.REMAINDER})) do
 			local operator = self.previous()
 			local right = self.pow()
 			expr = Expression.Binary.new(expr, operator, right)
@@ -581,6 +581,10 @@ function Parser.new(tokens: {any})
 		return Statements.Pairs.new(keyword, set, block)
 	end
 	
+	function self.breakout() 
+		return Statements.Break.new()
+	end
+	
 	
 	function self.statement()
 		if (self.match({TokenType.Type.ITEM})) then return self.itemStatement() end
@@ -592,6 +596,7 @@ function Parser.new(tokens: {any})
 		if (self.match({TokenType.Type.RETURN})) then return self.returnStatement() end
 		if (self.match({TokenType.Type.SWITCH})) then return self.switchStatement() end
 		if (self.check(TokenType.Type.PAIRS)) then return self.pairsStatement() end
+		if (self.match({TokenType.Type.BREAK})) then return self.breakout() end
 		return self.expressionStatement()
 	end
 	
