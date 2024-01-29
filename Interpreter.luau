@@ -355,6 +355,10 @@ Interpreter = {
 		return nil
 	end;
 	
+	visitBreakStmt = function(stmt: Types.Statement)
+		return nil
+	end;
+	
 	visitVariableExpr = function(expr: Types.VariableReturnType)
 		local result, success = Interpreter.environment.get(expr.name)
 		if not success then
@@ -441,6 +445,13 @@ Interpreter = {
 					newError(expr.operator, "Expected <var> <operator> <number>")
 				end
 			end;
+			[TokenType.Type.REMAINDER] = function(c)
+				local res = Interpreter.checkNumberOperands(expr.operator, left, right)
+				if (res == -1) then 
+					result =  -1
+				end
+				result =  tonumber(left) % tonumber(right)
+			end;
 			[TokenType.Type.REMAINDEQ] = function(c)
 				if (ltype == "Variable" and tonumber(right) ~= nil) then
 					Interpreter.environment.assign(expr.left.name, left % right)
@@ -474,7 +485,7 @@ Interpreter = {
 					return
 				end
 				
-				newError(expr.operator, "Operator requirers <number> <operator> <number> or <string> <operator> <string> to run properly. Thanks! :D")
+				newError(expr.operator, "Operator requires <number> <operator> <number> or <string> <operator> <string> to run properly. Thanks! :D")
 				result =  -1
 			end;
 			[TokenType.Type.GREATERTHAN] = function(c) 
@@ -627,13 +638,13 @@ Interpreter = {
 	
 	checkNumberOperand = function(operator, operand) 
 		if (typeof(operand) == "number") then return true end
-		newError(operator, "Operator requirers <number> to run properly. Thanks! :D")
+		newError(operator, "Operator requires <number> to run properly. Thanks! :D")
 		return -1
 	end;
 	
 	checkNumberOperands = function(operator, left, right) 
 		if (tonumber(left) ~= nil and tonumber(right) ~= nil) then return true end
-		newError(operator, "Operator requirers <number> <operator> <number> to run properly. Thanks! :D")
+		newError(operator, "Operator requires <number> <operator> <number> to run properly. Thanks! :D")
 		return -1
 	end
 }
